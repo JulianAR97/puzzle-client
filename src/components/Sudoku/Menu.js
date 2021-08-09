@@ -2,7 +2,7 @@ const Menu = (props) => {
   const renderMenuButtons = (items) => {
     return items.map(
       (item, index) => 
-        <button key={index}>{item}</button>
+        <button onClick={props.handleClick} key={index}>{item}</button>
     )
   }
 

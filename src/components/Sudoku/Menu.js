@@ -1,8 +1,8 @@
 const Menu = (props) => {
   const renderMenuButtons = (items) => {
     return items.map(
-      item => 
-        <button>{item}</button>
+      (item, index) => 
+        <button key={index}>{item}</button>
     )
   }
 

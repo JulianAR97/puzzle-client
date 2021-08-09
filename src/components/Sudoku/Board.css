@@ -1,0 +1,6 @@
+#board {
+  width: 450px;
+  height: 450px;
+  display: inline-block;
+  margin: 10px;
+}

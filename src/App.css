@@ -1,6 +1,14 @@
+:root {
+  --main-bg-color: #282c34;
+  --accent-bg-color: lightblue;
+  --text-color-dark: black;
+  --text-color-light: white;
+  --main-highlight-color: blue;
+  --main-grey-color: lightgrey;
+}
+
 .App {
-  text-align: center;
-  background-color: #282c34;
+  background-color: var(--main-bg-color);
   min-height: 100vh;
 }
 
@@ -28,6 +36,14 @@
 
 .App-link {
   color: #61dafb;
+}
+
+/* remove default input styles */
+input {
+  border: none;
+}
+input:focus {
+  outline: none;
 }
 
 @keyframes App-logo-spin {

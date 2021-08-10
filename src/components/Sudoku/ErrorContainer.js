@@ -1,5 +1,3 @@
-import './ErrorContainer.css'
-
 const ErrorContainer = (props) => {
   const renderErrors = (errors) => {
     return errors.map(

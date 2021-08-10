@@ -3,4 +3,6 @@
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
+  font-weight: normal;
+  max-width: 960px;
 }

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Board from './Board.js'
 import Menu from './Menu.js'
+import ErrorContainer from './ErrorContainer.js'
 import './Sudoku.css'
 import {genArray} from '../../Helpers.js'
 
@@ -29,7 +30,8 @@ const Sudoku = (props) => {
         ...state.cellValues.slice(0, aIDX), 
         value, 
         ...state.cellValues.slice(aIDX + 1)
-      ]
+      ],
+      errors: [] // remove errors when cell changes
     })    
   }
 
@@ -47,11 +49,14 @@ const Sudoku = (props) => {
     setState({...state, loading: true})
     fetch('http://localhost:8001/solve', requestOptions)
       .then(res => res.json())
-      .then(json => setState({
+      .then(json => {
+        console.log(json)
+        setState({
         ...state, 
-        cellValues: json, 
+        cellValues: json.solution,
+        errors: json.errors, 
         loading: false
-      }))
+      })})
   }
   
 
@@ -71,19 +76,18 @@ const Sudoku = (props) => {
   }
 
   const renderContent = () => {
+    let loading = <div>loading...</div>
+    let board = <Board handleCellChange={handleCellChange} cellValues={state.cellValues} />
+    let menu = <Menu handleClick={handleMenuClick} items={state.menuItems} />
+    let errorContainer = <ErrorContainer errors={state.errors} />
     if (state.loading) {
-      return <div>loading...</div>
+      return <>{loading}</>
     } else {
       return (
         <>
-          <Board 
-            handleCellChange={handleCellChange} 
-            cellValues={state.cellValues}
-          />
-          <Menu 
-            handleClick={handleMenuClick} 
-            items={state.menuItems}
-          />
+          {state.errors[0] ? errorContainer : <></>}
+          {board}
+          {menu}
         </>
       )
     }
@@ -108,6 +112,7 @@ Sudoku.defaultProps = {
   ],
   cellValues: genArray(81, 0),
   loading: false,
+  errors: []
 
 }
 export default Sudoku

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Board from './Board.js'
 import Menu from './Menu.js'
+import './Sudoku.css'
 import {genArray} from '../../Helpers.js'
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -17,7 +18,7 @@ const Sudoku = (props) => {
     const target = event.target
     const value = Number(target.value)
     const parent = target.parentElement
-    const id = parent.id.split('-')[1] // ids are in form c-A0 to c-I8
+    const id = parent.id // ids are in form A0 to I8
     const row = id[0]
     const col = Number(id[1])
     const aIDX = ALPHABET.indexOf(row) * 9 + col // 00 to 80
@@ -69,16 +70,30 @@ const Sudoku = (props) => {
     
   }
 
-  if (state.loading) {
-    return <div>loading...</div>
-  } else {
-    return (
-      <div>
-        <Board handleCellChange={handleCellChange} cellValues={state.cellValues}></Board>
-        <Menu handleClick={handleMenuClick} items={state.menuItems}></Menu>
-      </div>
-    )
+  const renderContent = () => {
+    if (state.loading) {
+      return <div>loading...</div>
+    } else {
+      return (
+        <>
+          <Board 
+            handleCellChange={handleCellChange} 
+            cellValues={state.cellValues}
+          />
+          <Menu 
+            handleClick={handleMenuClick} 
+            items={state.menuItems}
+          />
+        </>
+      )
+    }
   }
+
+  return (
+    <div id="sudoku">
+      {renderContent()}
+    </div>
+  )
 }
 
 

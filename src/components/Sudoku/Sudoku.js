@@ -80,14 +80,15 @@ const Sudoku = (props) => {
     let board = <Board handleCellChange={handleCellChange} cellValues={state.cellValues} />
     let menu = <Menu handleClick={handleMenuClick} items={state.menuItems} />
     let errorContainer = <ErrorContainer errors={state.errors} />
+    let boardMenuContainer = <div className="boardMenuContainer">{board}{menu}</div>
+    
     if (state.loading) {
       return <>{loading}</>
     } else {
       return (
         <>
           {state.errors[0] ? errorContainer : <></>}
-          {board}
-          {menu}
+          {boardMenuContainer}
         </>
       )
     }

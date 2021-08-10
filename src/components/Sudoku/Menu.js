@@ -1,4 +1,3 @@
-import './Menu.css'
 const Menu = (props) => {
   const renderMenuButtons = (items) => {
     return items.map(

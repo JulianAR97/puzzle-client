@@ -1,7 +1,7 @@
 import Cell from './Cell';
-import './Board.css'
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
 const Board = (props) => {
 
   const renderCells = (values) => {

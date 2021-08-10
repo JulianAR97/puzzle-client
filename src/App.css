@@ -12,6 +12,7 @@ html, body {
 }
 .App {
   min-height: 100vh;
+  margin: 20px;
 }
 
 .App-logo {

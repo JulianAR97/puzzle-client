@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Board from './Board.js'
 import Menu from './Menu.js'
 import ErrorContainer from './ErrorContainer.js'
+import ReactLoading from 'react-loading'
 import './Sudoku.css'
 import {genArray} from '../../Helpers.js'
 
@@ -17,7 +18,7 @@ const Sudoku = (props) => {
   */
   const handleCellChange = (event) => {
     const target = event.target
-    const value = Number(target.value)
+    const value = Number(target.value) || 0 // protects against letters being entered
     const parent = target.parentElement
     const id = parent.id // ids are in form A0 to I8
     const row = id[0]
@@ -76,7 +77,7 @@ const Sudoku = (props) => {
   }
 
   const renderContent = () => {
-    let loading = <div>loading...</div>
+    let loading = <ReactLoading id="loading" type="spin" color="#FFFFFF" />
     let board = <Board handleCellChange={handleCellChange} cellValues={state.cellValues} />
     let menu = <Menu handleClick={handleMenuClick} items={state.menuItems} />
     let errorContainer = <ErrorContainer errors={state.errors} />

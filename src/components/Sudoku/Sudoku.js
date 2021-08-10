@@ -47,7 +47,7 @@ const Sudoku = (props) => {
     }
     
     setState({...state, loading: true})
-    fetch('http://localhost:8001/solve', requestOptions)
+    fetch('http://192.168.0.132:8001/solve', requestOptions)
       .then(res => res.json())
       .then(json => {
         console.log(json)
@@ -96,6 +96,7 @@ const Sudoku = (props) => {
 
   return (
     <div id="sudoku">
+      <h1>Sudoku Solver</h1>
       {renderContent()}
     </div>
   )

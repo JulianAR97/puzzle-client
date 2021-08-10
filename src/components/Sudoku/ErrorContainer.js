@@ -2,7 +2,7 @@ const ErrorContainer = (props) => {
   const renderErrors = (errors) => {
     return errors.map(
       (error, i) => 
-        <p key={i}>{error}</p>
+        <h3 key={i}>{error}</h3>
     )
   }
   return (

@@ -1,8 +1,14 @@
+import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import './About.css'
+import './About.md'
+
 const About = (props) => {
   return (
     <div id="about">
-      {props.content}
+      <ReactMarkdown>
+        {props.content}
+      </ReactMarkdown>
     </div>
   )
 }

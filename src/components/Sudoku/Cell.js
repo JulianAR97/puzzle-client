@@ -1,6 +1,7 @@
+import './Cell.css'
 const Cell = (props) => {
   return (
-    <div id={props.id}>
+    <div style={{aspectRatio: "1/1"}} className="cell" id={props.id}>
       <input 
         maxLength="1" 
         value={props.value || ''} 

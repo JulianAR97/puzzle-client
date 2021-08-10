@@ -1,14 +1,16 @@
 :root {
-  --main-bg-color: #282c34;
-  --accent-bg-color: lightblue;
-  --text-color-dark: black;
-  --text-color-light: white;
-  --main-highlight-color: blue;
+  --main-bg-color: 	#deb7ff;
+  --accent-bg-color: #8549a7;
+  --text-color-dark: #8549a7;
+  --text-color-light: #deb7ff;
+  --main-highlight-color: #c785ec;
   --main-grey-color: lightgrey;
 }
 
-.App {
+html, body {
   background-color: var(--main-bg-color);
+}
+.App {
   min-height: 100vh;
 }
 

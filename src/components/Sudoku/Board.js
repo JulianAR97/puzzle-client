@@ -1,17 +1,13 @@
 import Cell from './Cell';
+import './Board.css'
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const Board = (props) => {
-  
-  const genCellID = (i) => {
-    let cellNum = ALPHABET[Math.floor(i / 9)] + i % 9
-    return `c-${cellNum}`
-  }
 
   const renderCells = (values) => {
     return values.map(
       (v, i) => {
-        const id = genCellID(i)
+        const id = ALPHABET[Math.floor(i / 9)] + i % 9
         return (
           <Cell 
             key={i} 

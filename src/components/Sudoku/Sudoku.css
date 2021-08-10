@@ -1,3 +1,7 @@
 #sudoku {
-  background-color: var(--accent-bg-color)
+  background-color: var(--accent-bg-color);
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
 }

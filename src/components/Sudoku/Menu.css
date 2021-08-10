@@ -1,11 +1,12 @@
 #sudokuMenu {
-  display: inline-block;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+  margin: 20px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 110px;
 }
 
 .menuButton {
+  display: inline-block;
   cursor: pointer;
   padding: 5px;
   margin: 2px;
@@ -17,4 +18,8 @@
 
 .menuButton:hover {
   background-color: darkgrey;
+}
+
+span {
+  flex-wrap: nowrap;
 }

@@ -6,6 +6,8 @@
   width: 45px;
   border-right: 1px solid var(--main-highlight-color);
   border-bottom: 1px solid var(--main-highlight-color);
+  flex-grow: 1;
+  flex-shrink: 0;
 }
 
 .cell > input {

@@ -1,8 +1,17 @@
+import './Menu.css'
 const Menu = (props) => {
   const renderMenuButtons = (items) => {
     return items.map(
       (item, index) => 
-        <button onClick={props.handleClick} key={index}>{item}</button>
+        <div
+          className="menuButton" 
+          onClick={props.handleClick} 
+          key={index}
+        >
+          <span>
+            {item}
+          </span>
+        </div>
     )
   }
 

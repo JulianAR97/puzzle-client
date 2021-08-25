@@ -43,7 +43,6 @@ const Sudoku = (props) => {
     } else {
       let idx = cellIDToIDX(state.activeCell)
       let newA = [...state.cellValues.slice(0, idx), solution[idx], ...state.cellValues.slice(idx + 1)]
-      console.log(newA)
       return newA
     }
   }
@@ -60,13 +59,32 @@ const Sudoku = (props) => {
     }
     
     setState({...state, loading: true})
-    fetch('http://localhost:8001/solve', requestOptions)
+    fetch('https://puzzle-solver-node.herokuapp.com/solve', requestOptions)
       .then(res => res.json())
       .then(json => {
         console.log(json)
         setState({
         ...state, 
         cellValues: getCellValues(json.solution, type),
+        errors: json.errors, 
+        loading: false
+      })})
+  }
+
+  const checkPuzzle = (puzzle) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(puzzle)
+    }
+
+    setState({...state, loading: true})
+    fetch('http://localhost:8001/check', requestOptions)
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        setState({
+        ...state,
         errors: json.errors, 
         loading: false
       })})
@@ -84,8 +102,11 @@ const Sudoku = (props) => {
       case 'Clear':
         setState({...state, cellValues: genArray(81, 0)})
         return
+      case 'Check':
+        checkPuzzle(state.cellValues)
+        return
       case 'Generate':
-        fetch('https://sugoku.herokuapp.com/board?difficulty=easy')
+        fetch('http://sugoku.herokuapp.com/board?difficulty=easy')
           .then(res => res.json())
           .then(res => setState({...state, cellValues: res.board.flat()}))
         return
@@ -95,9 +116,17 @@ const Sudoku = (props) => {
     
   }
 
+  const handleFocus = (event) => {
+    const target = event.target
+    const parent = target.parentElement
+    const id = parent.id // ids are in form A0 to I8
+    console.log(id)
+    setState({...state, activeCell: id})
+  }
+
   const renderContent = () => {
     let loading = state.loading ? <ReactLoading id="loading" type="spin" color="#FFFFFF" /> : <></>
-    let board = <Board handleCellChange={handleCellChange} cellValues={state.cellValues} />
+    let board = <Board handleFocus={handleFocus} handleCellChange={handleCellChange} cellValues={state.cellValues} />
     let menu = <Menu handleClick={handleMenuClick} items={state.menuItems} />
     let errorContainer = state.errors[0] ? <ErrorContainer errors={state.errors} /> : <></>
     let boardMenuContainer = <div className="boardMenuContainer">{board}{menu}</div>
@@ -112,7 +141,7 @@ const Sudoku = (props) => {
     )
   }
 
-  console.log(props)
+  console.log(state)
   return (
     <div id="sudoku">
       <h1>Sudoku Solver</h1>

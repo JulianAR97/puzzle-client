@@ -4,9 +4,9 @@ const Cell = (props) => {
       <input 
         maxLength="1" 
         value={props.value || ''} 
-        onChange={props.handleChange}>
-
-      </input>
+        onChange={props.handleChange}
+        onFocus={props.handleFocus}
+      />
     </div>
   )
 }

@@ -14,6 +14,7 @@ const Board = (props) => {
             id={id} 
             value={v}
             handleChange={props.handleCellChange}
+            handleFocus={props.handleFocus}
           />
         )
       }

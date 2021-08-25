@@ -79,7 +79,7 @@ const Sudoku = (props) => {
     }
 
     setState({...state, loading: true})
-    fetch('http://localhost:8001/check', requestOptions)
+    fetch('https://puzzle-solver-node.herokuapp.com/check', requestOptions)
       .then(res => res.json())
       .then(json => {
         console.log(json)
@@ -100,7 +100,7 @@ const Sudoku = (props) => {
         getSolution(state.cellValues, 'cell')
         return
       case 'Clear':
-        setState({...state, cellValues: genArray(81, 0)})
+        setState({...state, cellValues: genArray(81, 0), errors: []})
         return
       case 'Check':
         checkPuzzle(state.cellValues)

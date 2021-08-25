@@ -4,7 +4,8 @@ import Menu from './Menu.js'
 import ErrorContainer from './ErrorContainer.js'
 import ReactLoading from 'react-loading'
 import './Sudoku.css'
-import {genArray} from '../../Helpers.js'
+import {genArray, cellIDToIDX} from '../../Helpers.js'
+
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -36,11 +37,22 @@ const Sudoku = (props) => {
     })    
   }
 
+  const getCellValues = (solution, type) => {
+    if (type === 'puzzle') {
+      return solution
+    } else {
+      let idx = cellIDToIDX(state.activeCell)
+      let newA = [...state.cellValues.slice(0, idx), solution[idx], ...state.cellValues.slice(idx + 1)]
+      console.log(newA)
+      return newA
+    }
+  }
+  
   /** 
    * Takes an array representing the current state.cellValues, fetches the solution, and then modifies state
    * @param {Array} puzzle
   */
-  const getSolution = (puzzle) => {
+  const getSolution = (puzzle, type) => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -54,18 +66,20 @@ const Sudoku = (props) => {
         console.log(json)
         setState({
         ...state, 
-        cellValues: json.solution,
+        cellValues: getCellValues(json.solution, type),
         errors: json.errors, 
         loading: false
       })})
   }
   
-
   const handleMenuClick = (event) => {
     let button = event.target.innerText
     switch(button) {
       case 'Solve Puzzle':
-        getSolution(state.cellValues)
+        getSolution(state.cellValues, 'puzzle')
+        return
+      case 'Solve Cell':
+        getSolution(state.cellValues, 'cell')
         return
       case 'Clear':
         setState({...state, cellValues: genArray(81, 0)})
@@ -98,6 +112,7 @@ const Sudoku = (props) => {
     )
   }
 
+  console.log(props)
   return (
     <div id="sudoku">
       <h1>Sudoku Solver</h1>

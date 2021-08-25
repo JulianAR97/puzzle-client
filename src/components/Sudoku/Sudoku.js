@@ -48,7 +48,7 @@ const Sudoku = (props) => {
     }
     
     setState({...state, loading: true})
-    fetch('http://192.168.0.132:8001/solve', requestOptions)
+    fetch('http://localhost:8001/solve', requestOptions)
       .then(res => res.json())
       .then(json => {
         console.log(json)
@@ -69,6 +69,11 @@ const Sudoku = (props) => {
         return
       case 'Clear':
         setState({...state, cellValues: genArray(81, 0)})
+        return
+      case 'Generate':
+        fetch('https://sugoku.herokuapp.com/board?difficulty=easy')
+          .then(res => res.json())
+          .then(res => setState({...state, cellValues: res.board.flat()}))
         return
       default:
         return

@@ -106,7 +106,7 @@ const Sudoku = (props) => {
         checkPuzzle(state.cellValues)
         return
       case 'Generate':
-        fetch('http://sugoku.herokuapp.com/board?difficulty=easy')
+        fetch('https://sugoku.herokuapp.com/board?difficulty=easy')
           .then(res => res.json())
           .then(res => setState({...state, cellValues: res.board.flat()}))
         return
@@ -141,7 +141,6 @@ const Sudoku = (props) => {
     )
   }
 
-  console.log(state)
   return (
     <div id="sudoku">
       <h1>Sudoku Solver</h1>
